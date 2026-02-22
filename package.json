@@ -12,7 +12,7 @@
     "clawd": "node cli.js"
   },
   "keywords": ["ai", "agent", "telegram", "termux", "openrouter"],
-  "author": "ClawdTricking",
+  "author": "zx_joy_",
   "license": "MIT",
   "dependencies": {
     "grammy": "^1.21.1",

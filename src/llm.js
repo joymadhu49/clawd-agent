@@ -21,7 +21,7 @@ async function callLLM(messages, config) {
         headers: {
           'Authorization': `Bearer ${config.openrouterKey}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://clawdtricking.xyz',
+          'HTTP-Referer': 'https://github.com/joymadhu49/clawd-agent',
           'X-Title': 'Clawd Agent',
         },
       }

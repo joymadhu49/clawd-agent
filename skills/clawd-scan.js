@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports = {
   name: 'clawd-scan',
-  description: 'Scan a token/contract address via clawdtricking.xyz',
+  description: 'Scan a token/contract address',
 
   trigger(text) {
     // Match Ethereum-style addresses: 0x followed by 40 hex characters
@@ -16,7 +16,7 @@ module.exports = {
     const address = match[0];
 
     try {
-      const res = await axios.get(`https://clawdtricking.xyz/api/scan/${address}`, {
+      const res = await axios.get(`https://api.gopluslabs.io/api/v1/token_security/1?contract_addresses=${address}`, {
         timeout: 10000,
       });
 

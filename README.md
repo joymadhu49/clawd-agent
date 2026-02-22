@@ -261,4 +261,4 @@ Pure JS, no native binaries, Termux-safe:
 
 ---
 
-**[@ClawdTricking](https://twitter.com/ClawdTricking) | [clawdtricking.xyz](https://clawdtricking.xyz)**
+**[@zx_joy_](https://x.com/zx_joy_)**

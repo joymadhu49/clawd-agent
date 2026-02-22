@@ -634,7 +634,7 @@ function helpCmd() {
   console.log(`  ${gray('Repo:')}     ${cyan('https://github.com/joymadhu49/clawd-agent')}`);
   console.log(`  ${gray('API Key:')} ${cyan('https://openrouter.ai/keys')}`);
   console.log(`  ${gray('Models:')}  ${cyan('https://openrouter.ai/models')}`);
-  console.log(`  ${gray('Site:')}    ${cyan('https://clawdtricking.xyz')}`);
+  console.log(`  ${gray('Twitter:')} ${cyan('https://x.com/zx_joy_')}`);
   nl();
 }
 

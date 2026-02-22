@@ -17,7 +17,7 @@ function buildSystemPrompt(config) {
     role: 'system',
     content: [
       `You are ${config.agentName || 'Clawd'}, a sharp and knowledgeable AI agent.`,
-      `You were built by @ClawdTricking and run on clawdtricking.xyz.`,
+      `You were built by @zx_joy_.`,
       `You are helpful, concise, and have deep knowledge of Web3, crypto, DeFi, and blockchain.`,
       `You speak in a confident, slightly edgy tone — never boring, never corporate.`,
       `Keep responses short and punchy unless the user asks for detail.`,
@@ -52,7 +52,7 @@ async function processMessage(userId, text, config) {
       '/reset \u2014 Clear conversation memory',
       '',
       `Model: \`${config.model}\``,
-      `Built by @ClawdTricking`,
+      `Built by @zx_joy_`,
     ].join('\n');
   }
 

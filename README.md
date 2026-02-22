@@ -212,34 +212,6 @@ Disable battery optimization for Termux in Android Settings for best results.
 ## Project Structure
 
 ```
-clawd-agent/
-├── cli.js              Interactive terminal UI
-├── index.js            Direct start (no UI)
-├── setup.js            Legacy setup wizard
-├── install.sh          Termux one-liner installer
-├── package.json
-│
-├── src/
-│   ├── agent.js        Core message processor
-│   ├── llm.js          OpenRouter API
-│   ├── memory.js       Conversation history (lowdb)
-│   ├── skills.js       Plugin loader
-│   ├── telegram.js     Telegram bot (grammy)
-│   ├── webui.js        Express web server
-│   └── ui.js           Terminal colors + formatting
-│
-├── public/
-│   └── index.html      Web UI (single file)
-│
-├── skills/
-│   ├── clawd-scan.js   Token scanner
-│   ├── device-info.js  Device hardware access
-│   └── remember.js     Note saving
-│
-└── data/
-    └── memory.json     Auto-created
-```
-
 ## Tech Stack
 
 Pure JS, no native binaries, Termux-safe:

@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 # Clawd Agent — Termux Installer
-# curl -fsSL https://raw.githubusercontent.com/ClawdTricking/clawd-agent/main/install.sh | bash
+# curl -fsSL https://raw.githubusercontent.com/joymadhu49/clawd-agent/master/install.sh | bash
 
 set -e
 
@@ -37,7 +37,7 @@ if [ -d "$REPO_DIR" ]; then
   cd "$REPO_DIR"
   git pull
 else
-  git clone https://github.com/ClawdTricking/clawd-agent.git "$REPO_DIR"
+  git clone https://github.com/joymadhu49/clawd-agent.git "$REPO_DIR"
   cd "$REPO_DIR"
 fi
 

@@ -1,119 +1,180 @@
-# Clawd Agent
+```
+   ██████╗██╗      █████╗ ██╗    ██╗██████╗ 
+  ██╔════╝██║     ██╔══██╗██║    ██║██╔══██╗
+  ██║     ██║     ███████║██║ █╗ ██║██║  ██║
+  ██║     ██║     ██╔══██║██║███╗██║██║  ██║
+  ╚██████╗███████╗██║  ██║╚███╔███╔╝██████╔╝
+   ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═════╝
+```
 
-Lightweight self-hosted AI agent that runs on your phone in Termux. No proot, no Ubuntu, no cloud. One command install, chat via Telegram or Web UI.
+**Self-hosted AI agent for your phone.** Runs in Termux. No root, no cloud, no bloat.
 
-**Built by [@ClawdTricking](https://twitter.com/ClawdTricking) | [clawdtricking.xyz](https://clawdtricking.xyz)**
+Chat via Telegram or Web UI. Access device hardware. Extend with plugins.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](LICENSE)
 
 ---
 
-## Features
+## Install (30 seconds)
 
-- **Runs natively in Termux** — pure Node.js, no native C++ deps
-- **One-command install** — `curl | bash` and you're live
-- **Under 100MB** total footprint
-- **OpenRouter LLM** — use any model (free or paid)
-- **Telegram bot** — chat with your agent from anywhere
-- **Web UI** — dark terminal-style chat in your phone browser
-- **Device access** — battery, location, camera, clipboard, WiFi, sensors, TTS
-- **Skill plugins** — drop a `.js` file in `/skills` to extend
-- **Persistent memory** — conversation history across sessions
-- **MIT licensed** — fully open source
-
-## Quick Install (Termux)
+Open **Termux** and paste:
 
 ```bash
 pkg install curl -y && curl -fsSL https://raw.githubusercontent.com/joymadhu49/clawd-agent/master/install.sh | bash
 ```
 
-Then configure and start:
+That's it. It installs everything: Node.js, git, dependencies, auto-start.
+
+When done:
 
 ```bash
 cd ~/clawd-agent
-node setup.js
-node index.js
+node cli.js
 ```
 
-## Manual Install
+> **On PC?** `git clone https://github.com/joymadhu49/clawd-agent.git && cd clawd-agent && npm install && node cli.js`
+
+---
+
+## 3-Step Setup
 
 ```bash
-git clone https://github.com/joymadhu49/clawd-agent.git
-cd clawd-agent
-npm install
-node setup.js
-node index.js
+cd ~/clawd-agent
+node cli.js onboard
 ```
 
-## Setup
+The interactive wizard walks you through everything:
 
-The setup wizard asks 5 questions:
+```
+Step 1  →  Pick a model (arrow keys, free options included)
+Step 2  →  Paste your OpenRouter API key
+Step 3  →  Done. Type "node cli.js start"
+```
 
-| Field | Description |
-|-------|-------------|
-| Agent name | Your agent's display name (default: Clawd) |
-| OpenRouter API key | Get one free at [openrouter.ai/keys](https://openrouter.ai/keys) |
-| Model | Any OpenRouter model ID (default: free model) |
-| Telegram token | From [@BotFather](https://t.me/BotFather) — leave empty to skip |
-| Web port | Default: 3000 |
+**Get a free API key** at [openrouter.ai/keys](https://openrouter.ai/keys) — takes 10 seconds, no credit card.
 
-Config is saved to `config.json` (gitignored).
+**Telegram bot** is optional. Create one via [@BotFather](https://t.me/BotFather) if you want it.
 
-## Usage
+---
+
+## CLI Commands
+
+Everything happens in the terminal. No config files to edit.
+
+```bash
+node cli.js              # Interactive menu (arrow keys)
+node cli.js onboard      # Setup wizard
+node cli.js start        # Launch the agent
+node cli.js config       # Change API key, model, etc.
+node cli.js status       # Check health + test API connection
+node cli.js skills       # See installed plugins
+node cli.js reset        # Clear memory or config
+node cli.js help         # All commands + links
+```
+
+---
+
+## Chat
 
 ### Web UI
 
-Open `http://localhost:3000` in your browser (or `http://PHONE_IP:3000` from another device on the same WiFi).
+After starting, open in your browser:
+
+```
+http://localhost:3000
+```
+
+From another device on the same WiFi:
+
+```
+http://YOUR_PHONE_IP:3000
+```
+
+Dark terminal-style chat. Works on phone and desktop.
 
 ### Telegram
 
-Message your bot directly. It supports all commands and skills.
+Message your bot directly. All commands and skills work there too.
 
-### Commands
+### Chat Commands
 
-| Command | Description |
+| Command | What it does |
 |---------|-------------|
-| `/help` | Show available commands |
-| `/skills` | List loaded skill plugins |
-| `/device` | Show device access commands |
-| `/reset` | Clear conversation memory |
+| `/help` | Show commands |
+| `/skills` | List plugins |
+| `/device` | Device access options |
+| `/reset` | Clear memory |
 
-### Device Access
+---
 
-**Web UI** — click the "Device" button to access:
-- Location (GPS)
-- Camera (capture photo)
-- Microphone (record audio)
-- Battery status
-- Network info
-- Device info
-- Notifications
+## Device Access
 
-**Telegram (Termux)** — just type naturally:
-- `battery` — battery level and charging status
-- `where am i` — GPS location with Google Maps link
-- `take a photo` — capture from camera
-- `clipboard` — read clipboard contents
-- `wifi` — WiFi connection info
-- `volume` — volume levels
-- `sensors` — accelerometer data
-- `say hello` — text-to-speech
+### Web UI
 
-Requires [Termux:API](https://f-droid.org/en/packages/com.termux.api/) app from F-Droid.
+Click the **Device** button at the bottom:
 
-## Skills
+| Button | Permission | What you get |
+|--------|-----------|-------------|
+| Location | GPS | Lat/long + Google Maps link |
+| Camera | Camera | Captures a photo, shows in chat |
+| Microphone | Mic | Records 5s audio clip |
+| Battery | None | Level, charging, time remaining |
+| Network | None | Type, speed, RTT |
+| Device Info | None | Platform, screen, cores, memory |
+| Notifications | Push | Enable browser alerts |
 
-Skills are `.js` files in the `/skills` directory. Drop one in and restart.
+### Telegram (Termux only)
 
-### Built-in Skills
+Just type naturally:
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
-| `clawd-scan` | Any `0x` + 40 hex char address | Token/contract scanner via clawdtricking.xyz |
-| `remember` | `remember that...` | Save notes to persistent memory |
-| `device-info` | `battery`, `location`, `wifi`, etc. | Access device hardware (Termux) |
+| Say this | Get this |
+|----------|---------|
+| `battery` | Battery level + charging status |
+| `where am i` | GPS coordinates + Maps link |
+| `take a photo` | Camera capture |
+| `clipboard` | What you last copied |
+| `wifi` | Network name, IP, speed |
+| `volume` | All volume levels |
+| `say hello world` | Text-to-speech |
 
-### Writing a Skill
+> Needs [Termux:API app](https://f-droid.org/en/packages/com.termux.api/) from F-Droid.
+
+---
+
+## Free Models
+
+All free, no credit card needed:
+
+| Model | Best for |
+|-------|---------|
+| `meta-llama/llama-3.3-70b-instruct:free` | General chat |
+| `deepseek/deepseek-r1-0528:free` | Reasoning + logic |
+| `google/gemma-3-27b-it:free` | Fast responses |
+| `qwen/qwen3-coder:free` | Code + dev |
+| `mistralai/mistral-small-3.1-24b-instruct:free` | Instructions |
+| `nvidia/nemotron-3-nano-30b-a3b:free` | Lightweight |
+| `openai/gpt-oss-120b:free` | Large context |
+
+Pick one during `node cli.js onboard` or change anytime with `node cli.js config`.
+
+---
+
+## Skills (Plugins)
+
+Drop a `.js` file into `skills/` and restart. That's it.
+
+### Built-in
+
+| Skill | Trigger | Does |
+|-------|---------|------|
+| `clawd-scan` | Paste any `0x...` address | Scans token/contract |
+| `remember` | `remember that...` | Saves notes to memory |
+| `device-info` | `battery`, `location`, etc. | Reads phone hardware |
+
+### Make Your Own
 
 ```js
+// skills/my-skill.js
 module.exports = {
   name: 'my-skill',
   description: 'What it does',
@@ -124,32 +185,51 @@ module.exports = {
 
   async run(text, ctx) {
     // ctx = { userId, config }
-    return 'Result string';
+    return 'Response to user';
   }
 };
 ```
+
+---
+
+## Keep Running on Termux
+
+```bash
+# Prevent Android from killing it
+termux-wake-lock
+
+# Survive closing the terminal
+tmux new -s clawd 'node cli.js start'
+
+# Auto-start on phone reboot (installer sets this up)
+# Just install Termux:Boot from F-Droid
+```
+
+Disable battery optimization for Termux in Android Settings for best results.
+
+---
 
 ## Project Structure
 
 ```
 clawd-agent/
-├── index.js            Entry point (Bionic patch + startup)
-├── setup.js            Interactive setup wizard
+├── cli.js              Interactive terminal UI
+├── index.js            Direct start (no UI)
+├── setup.js            Legacy setup wizard
 ├── install.sh          Termux one-liner installer
 ├── package.json
-├── config.json         Created by setup (gitignored)
-├── LICENSE             MIT
 │
 ├── src/
 │   ├── agent.js        Core message processor
-│   ├── llm.js          OpenRouter API caller
+│   ├── llm.js          OpenRouter API
 │   ├── memory.js       Conversation history (lowdb)
-│   ├── skills.js       Skill plugin loader
+│   ├── skills.js       Plugin loader
 │   ├── telegram.js     Telegram bot (grammy)
-│   └── webui.js        Express web server
+│   ├── webui.js        Express web server
+│   └── ui.js           Terminal colors + formatting
 │
 ├── public/
-│   └── index.html      Web UI (single file, no build)
+│   └── index.html      Web UI (single file)
 │
 ├── skills/
 │   ├── clawd-scan.js   Token scanner
@@ -157,51 +237,28 @@ clawd-agent/
 │   └── remember.js     Note saving
 │
 └── data/
-    └── memory.json     Auto-created on first run
+    └── memory.json     Auto-created
 ```
 
 ## Tech Stack
 
-| Package | Purpose |
-|---------|---------|
-| [grammy](https://grammy.dev) | Telegram bot — pure JS, zero native deps |
-| [express](https://expressjs.com) | Web UI server |
-| [lowdb](https://github.com/typicode/lowdb) | JSON file database — no SQLite binaries |
-| [axios](https://axios-http.com) | HTTP client for OpenRouter |
-| [enquirer](https://github.com/enquirer/enquirer) | CLI setup wizard |
-| [dotenv](https://github.com/motdotla/dotenv) | Optional .env config |
+Pure JS, no native binaries, Termux-safe:
 
-> **Why these?** `grammy` over telegraf, `lowdb` over better-sqlite3 — the alternatives have native C++ deps that break on Termux ARM64.
-
-## Free Models
-
-Get a free API key at [openrouter.ai](https://openrouter.ai) and use any of these:
-
-| Model | Notes |
-|-------|-------|
-| `meta-llama/llama-3.3-70b-instruct:free` | Strong general purpose |
-| `deepseek/deepseek-r1-0528:free` | Reasoning model |
-| `google/gemma-3-27b-it:free` | Fast and capable |
-| `mistralai/mistral-small-3.1-24b-instruct:free` | Good for instructions |
-| `qwen/qwen3-coder:free` | Best for code |
-
-## Keep Alive on Termux
-
-```bash
-# Prevent Android from killing the process
-termux-wake-lock
-
-# Run in tmux so it survives terminal close
-tmux new -s clawd 'node index.js'
-
-# Auto-start on boot (install.sh sets this up)
-# Requires Termux:Boot app from F-Droid
-```
-
-## License
-
-[MIT](LICENSE) — do whatever you want with it.
+| Package | Why |
+|---------|-----|
+| [grammy](https://grammy.dev) | Telegram bot (not telegraf — native deps) |
+| [express](https://expressjs.com) | Web server |
+| [lowdb](https://github.com/typicode/lowdb) | JSON DB (not sqlite — native deps) |
+| [axios](https://axios-http.com) | HTTP client |
+| [enquirer](https://github.com/enquirer/enquirer) | Interactive CLI prompts |
+| [dotenv](https://github.com/motdotla/dotenv) | Env config |
 
 ---
 
-**@ClawdTricking | [clawdtricking.xyz](https://clawdtricking.xyz)**
+## License
+
+[MIT](LICENSE) — use it, fork it, ship it.
+
+---
+
+**[@ClawdTricking](https://twitter.com/ClawdTricking) | [clawdtricking.xyz](https://clawdtricking.xyz)**

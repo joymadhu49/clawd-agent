@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Lightweight self-hosted AI agent \u2014 Termux-ready, OpenRouter, Telegram + Web UI",
   "main": "index.js",
+  "bin": {
+    "clawd": "./cli.js"
+  },
   "scripts": {
     "start": "node index.js",
-    "setup": "node setup.js"
+    "setup": "node setup.js",
+    "clawd": "node cli.js"
   },
   "keywords": ["ai", "agent", "telegram", "termux", "openrouter"],
   "author": "ClawdTricking",
